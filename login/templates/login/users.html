@@ -10,7 +10,7 @@
     {% if userlist %}
         <ul>
         {% for user in userlist %}
-            <li><a href="/polls/{{ user.password }}/">{{ user.name }}</a></li>
+            <li>{{ user.name }}</li>
         {% endfor %}
         </ul>
     {% else %}

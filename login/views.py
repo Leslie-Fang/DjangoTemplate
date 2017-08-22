@@ -3,11 +3,12 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect,HttpResponse
 from django.template import loader
 import django.contrib.staticfiles
-
+from django.urls import reverse
 from models import DjangoUser
+
 
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
@@ -54,3 +55,14 @@ def getUsers(request):
     '''
 
     return render(request,'login/users.html',context)
+
+def signup(request):
+    if request.method == 'GET':
+        context = {}
+        return render(request, 'login/signup.html', context)
+    elif request.method == 'POST':
+        print(request.POST['username'])
+        print(request.POST['password'])
+        newUser = DjangoUser(name=request.POST['username'], password=request.POST['password'])
+        newUser.save()
+        return HttpResponseRedirect('/login/getUser/')
