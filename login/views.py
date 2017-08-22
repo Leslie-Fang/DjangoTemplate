@@ -40,8 +40,8 @@ def getUsers(request):
         print('No user')
     '''
         try:
-        user2 = DjangoUser.objects.filter(name='leslie')
-        user3 = DjangoUser.objects.get(name='hello')
+            user2 = DjangoUser.objects.filter(name='leslie')
+            user3 = DjangoUser.objects.get(name='hello')
         except:
             print("user not exsits")
             return render(request,'login/users.html',context)
@@ -65,4 +65,22 @@ def signup(request):
         print(request.POST['password'])
         newUser = DjangoUser(name=request.POST['username'], password=request.POST['password'])
         newUser.save()
+        return HttpResponseRedirect('/login/')
+
+
+def login(request):
+    if request.method == 'GET':
+        context = {}
+        return render(request, 'login/login.html', context)
+    elif request.method == 'POST':
+        try:
+            user = DjangoUser.objects.get(name=request.POST['username'])
+        except:
+            print('user not exsits!')
+            return HttpResponseRedirect('/login/signup/')
+        try:
+            user = DjangoUser.objects.get(name=request.POST['username'],password=request.POST['password'])
+        except:
+            print('passwrod wrong!')
+            return HttpResponseRedirect('/login/')
         return HttpResponseRedirect('/login/getUser/')
