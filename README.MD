@@ -4,7 +4,7 @@
 Todo List:
 1. Add css
 
-2. Add sesion in redis
+2. Add session in Redis
 
 3. Add cookie to control login status
 

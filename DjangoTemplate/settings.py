@@ -83,6 +83,9 @@ DATABASES = {
         'PASSWORD': 'secret',
         'HOST': 'localhost',
         'PORT': '3306',
+        'TEST': {
+            'NAME': 'test_express2react',
+        },
     }
 }
 
