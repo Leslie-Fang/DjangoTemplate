@@ -25,7 +25,7 @@ SECRET_KEY = 'p74p5y0-9kzr9p-ci0(b*b_a7whdn3y-%i*iy#w1(palqfg*3&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['150.95.148.104', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'express2react',#name is the database's name
         'USER': 'sampadm',
         'PASSWORD': 'secret',
-        'HOST': 'localhost',
+        'HOST': '150.95.148.104',
         'PORT': '3306',
         'TEST': {
             'NAME': 'test_express2react',
@@ -127,3 +127,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+SESSION_ENGINE = 'redis_sessions.session'
+SESSION_REDIS_HOST = 'localhost'
+SESSION_REDIS_PORT = 6379
+SESSION_REDIS_DB = 0
+
