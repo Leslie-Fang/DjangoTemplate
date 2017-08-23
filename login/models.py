@@ -8,4 +8,4 @@ from django.db import models
 #class is the table name
 class DjangoUser(models.Model):
     name = models.CharField(max_length=20)
-    password = models.CharField(max_length=20)
+    password = models.CharField(max_length=200)

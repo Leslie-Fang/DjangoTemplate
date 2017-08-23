@@ -6,10 +6,9 @@ Done list:
 * Use redis to save and count users' number in the MySQL
 * Add session in Redis
 * Add logout: destory the session id
+* password salt then save
 
 Todo List:
-
-* password salt then save
 
 * Add cookie to control login status
 

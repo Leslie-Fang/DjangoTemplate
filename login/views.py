@@ -9,6 +9,7 @@ import django.contrib.staticfiles
 from django.urls import reverse
 from models import DjangoUser
 from myRedis import myRedisClient
+import bcrypt as bcrypt
 
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
@@ -67,7 +68,8 @@ def signup(request):
         print(request.POST['username'])
         print(request.POST['password'])
         try:
-            newUser = DjangoUser(name=request.POST['username'], password=request.POST['password'])
+            saltPassword = bcrypt.hashpw(request.POST['password'], bcrypt.gensalt())
+            newUser = DjangoUser(name=request.POST['username'], password=saltPassword)
             newUser.save()
             myRedisClient.incr('userNumber')
             return HttpResponseRedirect('/login/')
@@ -86,11 +88,23 @@ def login(request):
         except:
             print('user not exsits!')
             return HttpResponseRedirect('/login/signup/')
-        try:
-            user = DjangoUser.objects.get(name=request.POST['username'],password=request.POST['password'])
-        except:
+        print(user.password)
+        print(bcrypt.checkpw(request.POST['password'].strip(), user.password))
+        if bcrypt.checkpw(request.POST['password'], user.password):
+            print("============>")
+            print(user)
+            print(user.password)
+        else:
             print('passwrod wrong!')
             return HttpResponseRedirect('/login/')
+        #try:
+            #user = DjangoUser.objects.get(name=request.POST['username'],password=request.POST['password'])
+            #print("============>")
+            #print(user)
+            #print(user.password)
+        #except:
+            #print('passwrod wrong!')
+            #return HttpResponseRedirect('/login/')
         request.session['user'] = request.POST['username']
         request.session['islogin'] = 1
         request.session.set_expiry(3600)#3600 seconds / 60 minutes
