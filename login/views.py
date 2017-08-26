@@ -64,12 +64,7 @@ def login(request):
             user = DjangoUser.objects.get(name=request.POST['username'])
         except:
             print('user not exsits!')
-            #use ajax, windows jump set in the javascript
-            return_data = "-1"
-            bytes = return_data.encode('utf-8')
-            return HttpResponse(bytes, content_type='application/json')
-            #use default django
-            #return HttpResponseRedirect('/login/signup/')
+            return HttpResponseRedirect('/login/signup/')
         print(user.password)
         print(bcrypt.checkpw(request.POST['password'].strip(), user.password))
         if bcrypt.checkpw(request.POST['password'], user.password):
@@ -78,12 +73,7 @@ def login(request):
             print(user.password)
         else:
             print('passwrod wrong!')
-            #use ajax, windows jump set in the javascript
-            return_data = "0"
-            bytes = return_data.encode('utf-8')
-            return HttpResponse(bytes, content_type='application/json')
-            #use default django
-            #return HttpResponseRedirect('/login/')
+            return HttpResponseRedirect('/login/')
         #try:
             #user = DjangoUser.objects.get(name=request.POST['username'],password=request.POST['password'])
             #print("============>")
@@ -95,12 +85,7 @@ def login(request):
         request.session['user'] = request.POST['username']
         request.session['islogin'] = 1
         request.session.set_expiry(3600)#3600 seconds / 60 minutes
-        # use ajax, windows jump set in the javascript
-        return_data = "1"
-        bytes = return_data.encode('utf-8')
-        return HttpResponse(bytes, content_type='application/json')
-        # use default django
-        #return HttpResponseRedirect('/users/')
+        return HttpResponseRedirect('/users/')
 
 def logout(request):
     request.session.flush()
