@@ -19,6 +19,7 @@ from login import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^login/', include('login.urls')),
     url(r'^logout/', views.logout, name='logout'),
+    url(r'^login/', include('login.urls')),
+    url(r'^users/', include('usersDetail.urls')),
 ]

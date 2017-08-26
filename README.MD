@@ -23,3 +23,11 @@ python manage.py runserver 0.0.0.0:4000
 code:
 * setting.py:
 add: ALLOWED_HOSTS = ['150.95.148.104', 'localhost', '127.0.0.1']
+
+
+# reactjs的集成
+
+计划：
+在根目录下建一个reactjs的目录去包含reactjs+redux的代码
+然后用babel和webpack打包到各个对应的APP的static的js文件夹下面，用gulp去监听和打包
+最后各个APP的页面中都去包括各自的js文件
