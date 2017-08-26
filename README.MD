@@ -4,14 +4,15 @@ Done list:
 * Signup
 * Login
 * Use redis to save and count users' number in the MySQL
-* Add session in Redis
+* Add session saved in Redis
 * Add logout: destory the session id
-* password salt then save
-* in the form add onfoucs to clear value
+* password salt then save in MySQL
+* In the form add onfoucs to clear value
 * Use session to control login status and html(view user could visit ) login control
 
 Todo List:
 
+* Use jQuery
 * Add a front frame, choose reactjs
 
 

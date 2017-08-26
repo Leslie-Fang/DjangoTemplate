@@ -59,6 +59,7 @@ def login(request):
             #KeyError: if the request.session['islogin'] is not define
             return render(request, 'login/login.html', context)
     elif request.method == 'POST':
+        print(request.POST['username'])
         try:
             user = DjangoUser.objects.get(name=request.POST['username'])
         except:
@@ -84,7 +85,7 @@ def login(request):
         request.session['user'] = request.POST['username']
         request.session['islogin'] = 1
         request.session.set_expiry(3600)#3600 seconds / 60 minutes
-        return HttpResponseRedirect('/login/getUser/')
+        return HttpResponseRedirect('/users/')
 
 def logout(request):
     request.session.flush()

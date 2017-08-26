@@ -8,6 +8,8 @@
       <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'login/js/login.js' %}"></script>
+
 </head>
 <body>
     <h1>Login</h1>
@@ -20,17 +22,7 @@
     {% csrf_token %}
         <label >Username</label> <input name="username" id="login_name" value="username" /><br />
         <label >Password</label> <input name="password" id="login_password" value="password" /><br />
-        <input class="btn btn-primary" type="submit" value="Login" />
+        <input id="login_button" class="btn btn-primary" type="submit" value="Login" />
     </form>
 </body>
-<script type="text/javascript">
-    function clear(){
-        console.log('clear');
-        this.value="";
-    };
-    $(document).ready(function(){
-        document.getElementById("login_name").onfocus=clear;
-        document.getElementById("login_password").onfocus=clear;
-	});
-</script>
 </html>
