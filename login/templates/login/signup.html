@@ -17,4 +17,16 @@
         <input class="btn btn-primary" type="submit" value="Sign" />
     </form>
 </body>
+<script type="text/javascript">
+    function clear(){
+        console.log('clear');
+        this.value="";
+    };
+    document.getElementById("signup_name").onfocus=clear;
+    document.getElementById("signup_password").onfocus=clear;
+
+    /*$(document).ready(function(){
+        alert("hhh");
+	});*/
+</script>
 </html>

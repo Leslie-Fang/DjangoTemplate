@@ -7,6 +7,7 @@ Done list:
 * Add session in Redis
 * Add logout: destory the session id
 * password salt then save
+* in the form add onfoucs to clear value
 
 Todo List:
 
