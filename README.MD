@@ -7,12 +7,10 @@ Done list:
 * Add session in Redis
 * Add logout: destory the session id
 * password salt then save
+* in the form add onfoucs to clear value
+* Use session to control login status and html(view user could visit ) login control
 
 Todo List:
-
-* Add cookie to control login status
-
-* Add html(view user could visit ) login control
 
 * Add a front frame, choose reactjs
 

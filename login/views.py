@@ -72,6 +72,7 @@ def signup(request):
             newUser = DjangoUser(name=request.POST['username'], password=saltPassword)
             newUser.save()
             myRedisClient.incr('userNumber')
+            print('Save user success!')
             return HttpResponseRedirect('/login/')
         except:
             print('Save user error!')
@@ -81,7 +82,16 @@ def signup(request):
 def login(request):
     if request.method == 'GET':
         context = {}
-        return render(request, 'login/login.html', context)
+        #if user login, would get the islogin in the session
+        try:
+            if request.session['islogin'] == 1:
+                print(request.session['islogin'])
+                context['islogin'] = 'islogin'
+                context['user'] = request.session['user']
+                return render(request, 'login/login.html', context)
+        except KeyError:
+            #KeyError: if the request.session['islogin'] is not define
+            return render(request, 'login/login.html', context)
     elif request.method == 'POST':
         try:
             user = DjangoUser.objects.get(name=request.POST['username'])

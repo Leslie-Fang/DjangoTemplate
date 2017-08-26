@@ -7,14 +7,30 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
       <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
     <h1>Login</h1>
+    {% if islogin %}
+        <p> hello {{user}}</p>
+    {% else %}
+        <p> hello Vistor</p>
+    {% endif %}
     <form action="/login/" method="post">
     {% csrf_token %}
-        <label >Username</label> <input name="username" id="signup_name" value="username" /><br />
-        <label >Password</label> <input name="password" id="signup_password" value="password" /><br />
+        <label >Username</label> <input name="username" id="login_name" value="username" /><br />
+        <label >Password</label> <input name="password" id="login_password" value="password" /><br />
         <input class="btn btn-primary" type="submit" value="Login" />
     </form>
 </body>
+<script type="text/javascript">
+    function clear(){
+        console.log('clear');
+        this.value="";
+    };
+    $(document).ready(function(){
+        document.getElementById("login_name").onfocus=clear;
+        document.getElementById("login_password").onfocus=clear;
+	});
+</script>
 </html>
