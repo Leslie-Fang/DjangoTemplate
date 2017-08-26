@@ -13,9 +13,18 @@ $(document).ready(function(){
         data={};
         data['username'] = document.getElementById("login_name").value;
         data['password'] = document.getElementById("login_password").value;
-        $.post("/login/",data,function(){
-            console.log("ajax post success.")
-            window.location.href = '/users/';
+        $.post("/login/",data,function(res){
+            console.log(res);
+            if(res == -1){
+                console.log("user not exsits.")
+                window.location.href = '/login/signup/';
+            }else if(res == 0){
+                console.log("password wrong.")
+                window.location.href = '/login/';
+            }else{
+                console.log("login success.")
+                window.location.href = '/users/';
+            }
         });
     });
 
