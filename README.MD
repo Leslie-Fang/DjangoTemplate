@@ -9,8 +9,7 @@ Done list:
 * password salt then save in MySQL
 * In the form add onfoucs to clear value
 * Use session to control login status and html(view user could visit ) login control
-* Use jQuery
-* Use ajax to submit login form
+
 
 Todo List:
 

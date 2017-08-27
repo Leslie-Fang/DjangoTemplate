@@ -1,0 +1,39 @@
+{
+  "name": "djangotemplate",
+  "version": "1.0.0",
+  "description": "一个基于Django的网站框架，主要包含了一些自己的使用习惯",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Leslie-Fang/DjangoTemplate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Leslie-Fang/DjangoTemplate/issues"
+  },
+  "homepage": "https://github.com/Leslie-Fang/DjangoTemplate#readme",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "child_process": "^1.0.2",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-develop-server": "^0.5.2",
+    "gulp-uglify": "^3.0.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "webpack-bundle-tracker": "^0.2.0"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^3.5.5"
+  }
+}
