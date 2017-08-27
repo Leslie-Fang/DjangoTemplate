@@ -1,5 +1,6 @@
 一个基于Django的网站框架，主要包含了一些自己的使用习惯
 
+V1.0:
 Done list:
 * Signup
 * Login
@@ -9,8 +10,6 @@ Done list:
 * password salt then save in MySQL
 * In the form add onfoucs to clear value
 * Use session to control login status and html(view user could visit ) login control
-* Use jQuery
-* Use ajax to submit login form
 
 Todo List:
 
