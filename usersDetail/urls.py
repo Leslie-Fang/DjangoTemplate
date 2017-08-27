@@ -6,4 +6,5 @@ from usersDetail import views
 
 urlpatterns = [
     url(r'^$', views.getUsers, name='getUsers'),
+    url(r'^test$', views.testUsers, name='testUsers'),
 ]

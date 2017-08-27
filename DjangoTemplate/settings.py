@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login',
     'usersDetail',
+    'webpack_loader',
 ]
 
 MIDDLEWARE = [
@@ -130,9 +131,16 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "reactjs"),
+    os.path.join(BASE_DIR),
+    os.path.join(BASE_DIR, "Front_webpack"),
     '/reactjs/',
 )
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'Front_webpack/'
+    }
+}
 
 SESSION_ENGINE = 'redis_sessions.session'
 SESSION_REDIS_HOST = 'localhost'

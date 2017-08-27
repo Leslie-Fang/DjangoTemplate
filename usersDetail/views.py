@@ -6,6 +6,9 @@ from django.shortcuts import render
 from DjangoTemplate.myRedis import myRedisClient
 from login.models import DjangoUser
 
+def testUsers(request):
+    context = {}
+    return render(request, 'usersDetail/test.html', context)
 # Create your views here.
 def getUsers(request):
     context = {}
