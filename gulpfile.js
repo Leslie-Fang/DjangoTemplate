@@ -34,4 +34,8 @@ gulp.task( 'server_start', function() {
     });
 });
 
+gulp.task('watch',function(){
+    gulp.watch([Paths.react_src],['babel','webpack']);
+});
+
 gulp.task('default', ['babel','webpack']);
