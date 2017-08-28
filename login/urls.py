@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^main/', views.main, name='login_main'),
     url(r'^createUser/', views.createUser, name='login_createUser'),
     url(r'^signup/', views.signup, name='login_signup'),
+    url(r'^react/signup/', views.react_signup, name='login_react_signup'),
 ]
