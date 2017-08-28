@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 230);
+/******/ 	return __webpack_require__(__webpack_require__.s = 231);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -14856,11 +14856,13 @@ var signup = exports.signup = function signup() {
             return Object.assign({}, state, { signup: action.payload });
         case 'SIGNUP_ED':
             console.log('SIGNUP_ED');
-            //console.log(action.payload.state);
+            console.log(action.payload);
+            console.log(action.payload.state);
             if (action.payload.state == 'userExsit') {
                 window.location.href = '/signup';
                 alert('The username exsits, please select another one.');
-            } else if (action.payload.state == 'ok') {
+            } else if (action.payload.state.toUpperCase() == 'OK') {
+                console.log('jump to login');
                 window.location.href = '/login';
             }
             return Object.assign({}, state, { signup: action.payload });
@@ -25147,8 +25149,28 @@ module.exports = ReactDOMInvalidARIAHook;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 229 */,
-/* 230 */
+/* 229 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _Cookies = __webpack_require__(235);
+
+var _Cookies2 = _interopRequireDefault(_Cookies);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _Cookies2.default;
+module.exports = exports['default'];
+
+/***/ }),
+/* 230 */,
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25165,7 +25187,7 @@ var _reactRedux = __webpack_require__(97);
 
 var _store = __webpack_require__(98);
 
-var _container = __webpack_require__(231);
+var _container = __webpack_require__(232);
 
 var _container2 = _interopRequireDefault(_container);
 
@@ -25243,7 +25265,7 @@ var Board = function (_React$Component2) {
 _reactDom2.default.render(_react2.default.createElement(Board, null), document.getElementById('main'));
 
 /***/ }),
-/* 231 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25259,7 +25281,7 @@ var _reactRedux = __webpack_require__(97);
 
 var _redux = __webpack_require__(33);
 
-var _index = __webpack_require__(232);
+var _index = __webpack_require__(233);
 
 var _react = __webpack_require__(32);
 
@@ -25268,6 +25290,10 @@ var _react2 = _interopRequireDefault(_react);
 var _reactDom = __webpack_require__(99);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _universalCookie = __webpack_require__(229);
+
+var _universalCookie2 = _interopRequireDefault(_universalCookie);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25335,7 +25361,10 @@ var Container2 = function (_React$Component) {
                 alert("密码只能含有数字有字母!");
                 return false;
             }
-            this.props.signnup(this.state.userNameValue, this.state.passwordValue);
+            var cookies = new _universalCookie2.default();
+            console.log("=========>");
+            var csrftoken = cookies.get('csrftoken');
+            this.props.signnup(this.state.userNameValue, this.state.passwordValue, csrftoken);
         }
     }, {
         key: 'handleusernameFocus',
@@ -25411,7 +25440,7 @@ var Container2 = function (_React$Component) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, matchDispatchToProps)(Container2);
 
 /***/ }),
-/* 232 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25422,13 +25451,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.redoCurrentComment = exports.undoCurrentComment = exports.saveCurrentComment = exports.addComment = exports.headerInit = exports.logout = exports.signup = exports.submitData = undefined;
 
-var _jquery = __webpack_require__(233);
+var _jquery = __webpack_require__(234);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
 var _store = __webpack_require__(98);
 
-var _universalCookie = __webpack_require__(234);
+var _universalCookie = __webpack_require__(229);
 
 var _universalCookie2 = _interopRequireDefault(_universalCookie);
 
@@ -25462,28 +25491,33 @@ var submitData = exports.submitData = function submitData(username, password) {
     };
 };
 
-var signup = exports.signup = function signup(username, password) {
+var signup = exports.signup = function signup(username, password, csrftoken) {
     console.log("log codedata");
     console.log(username);
     console.log(password);
+    console.log("in signup action ===========>");
+    console.log(csrftoken);
     return {
         type: 'SIGNUP_ING',
         state: 'isFetchingdata',
         payload: _jquery2.default.ajax({
             method: "POST",
             data: { username: username, password: password },
+            headers: { "X-CSRFToken": csrftoken },
             url: "/login/signup/",
-            dataType: "json"
-        }).then(function (data) {
-            console.log(data);
-            console.log('back in ajax!');
-            var action = {
-                type: 'SIGNUP_ED',
-                state: 'finishFetchingdata',
-                payload: data
-            };
-            _store.store.dispatch(action);
-            return data;
+            dataType: "json",
+            complete: function complete(data) {
+                console.log(data);
+                console.log(data.responseText);
+                console.log('back in ajax!');
+                var action = {
+                    type: 'SIGNUP_ED',
+                    state: 'finishFetchingdata',
+                    payload: { state: data.statusText }
+                };
+                _store.store.dispatch(action);
+                return data;
+            }
         })
     };
 };
@@ -25563,7 +25597,7 @@ var redoCurrentComment = exports.redoCurrentComment = function redoCurrentCommen
 };
 
 /***/ }),
-/* 233 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -35821,26 +35855,6 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-
-/***/ }),
-/* 234 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _Cookies = __webpack_require__(235);
-
-var _Cookies2 = _interopRequireDefault(_Cookies);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _Cookies2.default;
-module.exports = exports['default'];
 
 /***/ }),
 /* 235 */

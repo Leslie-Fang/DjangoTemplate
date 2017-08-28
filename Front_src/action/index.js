@@ -29,28 +29,33 @@ export const submitData = (username,password) => {
     }
 };
 
-export const signup = (username,password) => {
+export const signup = (username,password,csrftoken) => {
     console.log("log codedata");
     console.log(username);
     console.log(password);
+    console.log("in signup action ===========>");
+    console.log(csrftoken);
     return {
         type: 'SIGNUP_ING',
         state: 'isFetchingdata',
         payload: ($.ajax({
             method: "POST",
             data: {username: username, password: password},
+            headers: {"X-CSRFToken": csrftoken},
             url: "/login/signup/",
-            dataType: "json"
-        }).then(function (data) {
-            console.log(data);
-            console.log('back in ajax!');
-            const action = {
-                type: 'SIGNUP_ED',
-                state: 'finishFetchingdata',
-                payload: data
-            };
-            store.dispatch(action);
-            return data;
+            dataType: "json",
+            complete: function(data){
+                console.log(data);
+                console.log(data.responseText);
+                console.log('back in ajax!');
+                const action = {
+                    type: 'SIGNUP_ED',
+                    state: 'finishFetchingdata',
+                    payload: {state:data.statusText}
+                };
+                store.dispatch(action);
+                return data;
+            }
         }))
     }
 };

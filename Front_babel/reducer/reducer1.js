@@ -45,11 +45,13 @@ var signup = exports.signup = function signup() {
             return Object.assign({}, state, { signup: action.payload });
         case 'SIGNUP_ED':
             console.log('SIGNUP_ED');
-            //console.log(action.payload.state);
+            console.log(action.payload);
+            console.log(action.payload.state);
             if (action.payload.state == 'userExsit') {
                 window.location.href = '/signup';
                 alert('The username exsits, please select another one.');
-            } else if (action.payload.state == 'ok') {
+            } else if (action.payload.state.toUpperCase() == 'OK') {
+                console.log('jump to login');
                 window.location.href = '/login';
             }
             return Object.assign({}, state, { signup: action.payload });

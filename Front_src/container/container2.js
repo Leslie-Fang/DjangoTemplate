@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux';
 import {signup} from '../../Front_babel/action/index.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Cookies from 'universal-cookie';
 
 function mapStateToProps(state) {
     return ({
@@ -51,7 +52,10 @@ class Container2 extends React.Component {
             alert("密码只能含有数字有字母!");
             return false;
         }
-        this.props.signnup(this.state.userNameValue,this.state.passwordValue);
+        const cookies = new Cookies();
+        console.log("=========>")
+        var csrftoken = cookies.get('csrftoken')
+        this.props.signnup(this.state.userNameValue,this.state.passwordValue,csrftoken);
     }
     handleusernameFocus(event){
         // console.log('Onfocus');

@@ -45,28 +45,33 @@ var submitData = exports.submitData = function submitData(username, password) {
     };
 };
 
-var signup = exports.signup = function signup(username, password) {
+var signup = exports.signup = function signup(username, password, csrftoken) {
     console.log("log codedata");
     console.log(username);
     console.log(password);
+    console.log("in signup action ===========>");
+    console.log(csrftoken);
     return {
         type: 'SIGNUP_ING',
         state: 'isFetchingdata',
         payload: _jquery2.default.ajax({
             method: "POST",
             data: { username: username, password: password },
+            headers: { "X-CSRFToken": csrftoken },
             url: "/login/signup/",
-            dataType: "json"
-        }).then(function (data) {
-            console.log(data);
-            console.log('back in ajax!');
-            var action = {
-                type: 'SIGNUP_ED',
-                state: 'finishFetchingdata',
-                payload: data
-            };
-            _store.store.dispatch(action);
-            return data;
+            dataType: "json",
+            complete: function complete(data) {
+                console.log(data);
+                console.log(data.responseText);
+                console.log('back in ajax!');
+                var action = {
+                    type: 'SIGNUP_ED',
+                    state: 'finishFetchingdata',
+                    payload: { state: data.statusText }
+                };
+                _store.store.dispatch(action);
+                return data;
+            }
         })
     };
 };

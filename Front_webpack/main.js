@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 229);
+/******/ 	return __webpack_require__(__webpack_require__.s = 230);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -14856,11 +14856,13 @@ var signup = exports.signup = function signup() {
             return Object.assign({}, state, { signup: action.payload });
         case 'SIGNUP_ED':
             console.log('SIGNUP_ED');
-            //console.log(action.payload.state);
+            console.log(action.payload);
+            console.log(action.payload.state);
             if (action.payload.state == 'userExsit') {
                 window.location.href = '/signup';
                 alert('The username exsits, please select another one.');
-            } else if (action.payload.state == 'ok') {
+            } else if (action.payload.state.toUpperCase() == 'OK') {
+                console.log('jump to login');
                 window.location.href = '/login';
             }
             return Object.assign({}, state, { signup: action.payload });
@@ -25147,7 +25149,8 @@ module.exports = ReactDOMInvalidARIAHook;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 229 */
+/* 229 */,
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

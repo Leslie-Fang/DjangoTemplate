@@ -20,6 +20,10 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _universalCookie = require('universal-cookie');
+
+var _universalCookie2 = _interopRequireDefault(_universalCookie);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -86,7 +90,10 @@ var Container2 = function (_React$Component) {
                 alert("密码只能含有数字有字母!");
                 return false;
             }
-            this.props.signnup(this.state.userNameValue, this.state.passwordValue);
+            var cookies = new _universalCookie2.default();
+            console.log("=========>");
+            var csrftoken = cookies.get('csrftoken');
+            this.props.signnup(this.state.userNameValue, this.state.passwordValue, csrftoken);
         }
     }, {
         key: 'handleusernameFocus',
