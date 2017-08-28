@@ -4,7 +4,8 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        main:'./Front_babel/main.js'
+        main:'./Front_babel/main.js',
+        signup:'./Front_babel/signup.js'
     },
     output: {
         path : path.resolve(__dirname, 'Front_webpack/'),

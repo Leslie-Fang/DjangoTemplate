@@ -90,3 +90,7 @@ def login(request):
 def logout(request):
     request.session.flush()
     return HttpResponseRedirect('/login/')
+
+def react_signup(request):
+    context = {}
+    return render(request, 'login/signup_react.html', context)

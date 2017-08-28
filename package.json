@@ -23,12 +23,14 @@
     "gulp-babel": "^7.0.0",
     "gulp-develop-server": "^0.5.2",
     "gulp-uglify": "^3.0.0",
+    "jquery": "^3.2.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
+    "universal-cookie": "^2.0.8",
     "webpack-bundle-tracker": "^0.2.0"
   },
   "devDependencies": {
