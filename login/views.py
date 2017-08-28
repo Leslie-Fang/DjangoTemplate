@@ -36,6 +36,13 @@ def signup(request):
         print(request.POST['password'])
         try:
             saltPassword = bcrypt.hashpw(request.POST['password'], bcrypt.gensalt())
+            #judge if the username already or not
+            user = DjangoUser.objects.filter(name=request.POST['username'])
+            if user:
+                return_data = "userExsit"
+                bytes = return_data.encode('utf-8')
+                return HttpResponse(bytes, content_type='application/json')
+
             newUser = DjangoUser(name=request.POST['username'], password=saltPassword)
             newUser.save()
             myRedisClient.incr('userNumber')
@@ -43,7 +50,7 @@ def signup(request):
             #if use the Django template
             #return HttpResponseRedirect('/login/')
             #if use reactjs
-            return_data = "{state:ok}"
+            return_data = "ok"
             bytes = return_data.encode('utf-8')
             return HttpResponse(bytes, content_type='application/json')
         except:
@@ -51,7 +58,7 @@ def signup(request):
             # if use the Django template
             #return HttpResponseRedirect('/login/signup')
             #if use reactjs
-            return_data = "{state:saveError}"
+            return_data = "saveError"
             bytes = return_data.encode('utf-8')
             return HttpResponse(bytes, content_type='application/json')
 

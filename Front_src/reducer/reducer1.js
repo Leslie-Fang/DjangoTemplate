@@ -36,8 +36,8 @@ export var signup = function(state = {signip:null},action){
         console.log('SIGNUP_ED');
         console.log(action.payload);
         console.log(action.payload.state);
-        if(action.payload.state == 'userExsit' ){
-            window.location.href = '/signup';
+        if(action.payload.state.toUpperCase() == 'USEREXSIT' ){
+            window.location.href = '/login/react/signup';
             alert('The username exsits, please select another one.');
         }else if(action.payload.state.toUpperCase()  == 'OK'){
             console.log('jump to login');

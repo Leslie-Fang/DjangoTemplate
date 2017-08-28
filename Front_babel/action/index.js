@@ -67,7 +67,7 @@ var signup = exports.signup = function signup(username, password, csrftoken) {
                 var action = {
                     type: 'SIGNUP_ED',
                     state: 'finishFetchingdata',
-                    payload: { state: data.statusText }
+                    payload: { state: data.responseText }
                 };
                 _store.store.dispatch(action);
                 return data;

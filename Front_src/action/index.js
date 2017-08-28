@@ -51,7 +51,7 @@ export const signup = (username,password,csrftoken) => {
                 const action = {
                     type: 'SIGNUP_ED',
                     state: 'finishFetchingdata',
-                    payload: {state:data.statusText}
+                    payload: {state:data.responseText}
                 };
                 store.dispatch(action);
                 return data;
