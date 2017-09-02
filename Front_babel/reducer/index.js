@@ -9,7 +9,12 @@ var _redux = require('redux');
 var _reducer = require('./reducer1.js');
 
 var allReducers = (0, _redux.combineReducers)({
-    logout: _reducer.logout
+    login: _reducer.login,
+    signup: _reducer.signup,
+    logout: _reducer.logout,
+    headerInitState: _reducer.headerInitState,
+    saveCurrentCommentState: _reducer.saveCurrentCommentState,
+    undoRedoCommentState: _reducer.undoRedoCommentState
 });
 
 exports.default = allReducers;

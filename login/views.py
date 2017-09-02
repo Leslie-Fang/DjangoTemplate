@@ -7,6 +7,7 @@ from django.shortcuts import render
 
 from DjangoTemplate.myRedis import myRedisClient
 from models import DjangoUser
+import json
 
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
@@ -35,14 +36,31 @@ def signup(request):
         print(request.POST['password'])
         try:
             saltPassword = bcrypt.hashpw(request.POST['password'], bcrypt.gensalt())
+            #judge if the username already or not
+            user = DjangoUser.objects.filter(name=request.POST['username'])
+            if user:
+                return_data = "userExsit"
+                bytes = return_data.encode('utf-8')
+                return HttpResponse(bytes, content_type='application/json')
+
             newUser = DjangoUser(name=request.POST['username'], password=saltPassword)
             newUser.save()
             myRedisClient.incr('userNumber')
             print('Save user success!')
-            return HttpResponseRedirect('/login/')
+            #if use the Django template
+            #return HttpResponseRedirect('/login/')
+            #if use reactjs
+            return_data = "ok"
+            bytes = return_data.encode('utf-8')
+            return HttpResponse(bytes, content_type='application/json')
         except:
             print('Save user error!')
-            return HttpResponseRedirect('/login/signup')
+            # if use the Django template
+            #return HttpResponseRedirect('/login/signup')
+            #if use reactjs
+            return_data = "saveError"
+            bytes = return_data.encode('utf-8')
+            return HttpResponse(bytes, content_type='application/json')
 
 
 def login(request):
@@ -90,3 +108,7 @@ def login(request):
 def logout(request):
     request.session.flush()
     return HttpResponseRedirect('/login/')
+
+def react_signup(request):
+    context = {}
+    return render(request, 'login/signup_react.html', context)

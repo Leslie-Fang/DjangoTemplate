@@ -84,7 +84,7 @@ DATABASES = {
         'NAME': 'express2react',#name is the database's name
         'USER': 'sampadm',
         'PASSWORD': 'secret',
-        'HOST': '150.95.148.104',
+        'HOST': 'localhost',
         'PORT': '3306',
         'TEST': {
             'NAME': 'test_express2react',
