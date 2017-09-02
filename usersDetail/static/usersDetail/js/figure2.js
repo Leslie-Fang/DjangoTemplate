@@ -199,7 +199,17 @@ function dashboard(id, fData){
     var hG = histoGram(sF),
         pC = pieChart(tF), // create the pie-chart.
         leg= legend(tF);  // create the legend.
+
+    //to satisfied open the page in the wechat, click the page to rest the figure
+    d3.select('#main').on("click",click);
+    function click(){    // utility function to be called on mouseout.
+                // reset the pie-chart and legend.
+                console.log("click");
+                pC.update(tF);
+                leg.update(tF);
+    };
 }
+
 
 var freqData=[
 {State:'Morning',freq:{Sleep:0,Coding:1.5,Idle:1,Meeting:1.5,Eating:0.5,Fittness:0,Transportion:0.5,Reading:0}},
