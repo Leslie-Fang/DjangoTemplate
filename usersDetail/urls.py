@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^userhabbit$', views.showUserHabbit, name='showUserHabbit'),
     url(r'^createFakeData$', views.createFakeHistoryTradeData, name='createFakeData'),
     url(r'^getdata$', views.getData, name='getdata'),
+    url(r'^showfigure2$', views.showfigure2, name='showfigure2'),
 ]

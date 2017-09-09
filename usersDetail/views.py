@@ -87,3 +87,7 @@ def getData(request):
     ret = json.dumps(data)
     bytes = ret.encode('utf-8')
     return HttpResponse(bytes, content_type='application/json')
+
+def showfigure2(request):
+    context = {}
+    return render(request, 'usersDetail/figure2.html', context)
